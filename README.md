@@ -43,6 +43,8 @@ pip install -r requirements.txt
 
 Use `./config.cfg` `~/.config/imapbox/config.cfg` or `/etc/imapbox/config.cfg`
 
+Alternatively specifiy the shell argument `-c` to provide the path to a config file. E.g. `-c ./config.client1.cfg`
+
 Example:
 ```ini
 [imapbox]

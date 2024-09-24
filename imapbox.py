@@ -10,7 +10,11 @@ import getpass
 
 def load_configuration(args):
     config = configparser.ConfigParser(allow_no_value=True)
-    config.read(['./config.cfg', '/etc/imapbox/config.cfg', os.path.expanduser('~/.config/imapbox/config.cfg')])
+    if (args.specific_config):
+        locations = args.specific_config
+    else:
+        locations = ['./config.cfg', '/etc/imapbox/config.cfg', os.path.expanduser('~/.config/imapbox/config.cfg')]
+    config.read(locations)
 
     options = {
         'days': None,
@@ -129,6 +133,7 @@ def main():
     argparser.add_argument('-t', dest='test_only', help="Only a connection and folder retrival test will be performed", action='store_true')
     argparser.add_argument('-n', dest='specific_dsn', help="Use a specific DSN as account")
     argparser.add_argument('-v', '--version', dest='show_version', help="Show the current version", action="store_true")
+    argparser.add_argument('-c', dest='specific_config', help="Path to a config file to use")
     args = argparser.parse_args()
     options = load_configuration(args)
     rootDir = options['local_folder']
